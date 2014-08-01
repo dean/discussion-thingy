@@ -4,6 +4,7 @@
  */
 
 var express = require('express');
+var config = require('./config');
 
 //var http = require('http');
 var path = require('path');
@@ -14,22 +15,12 @@ var io = require('./sockets').listen(server) //this is where sockets.js comes in
 //var _ = require('lodash');
 
 
-var uristring = 
-    process.env.MONGOLAB_URI ||
-    process.env.MONGOHQ_URL ||
-    'mongodb://localhost/test';
-
-
-var mongoose = require('mongoose');
-mongoose.connect(uristring);
-
-var db = mongoose.connection;
 var points = require('./points')
 
 // all environments
 
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || config.port);
 
 app.set('views', path.join(__dirname, 'views'));
 app.engine('html', require('ejs').renderFile);
